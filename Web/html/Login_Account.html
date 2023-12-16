@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../style/footer.css" />
+    <link rel="stylesheet" href="../style/pop.css" />
+    <!-- icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
+    <!-- icon tab -->
+    <link rel="icon" href="../img/logo.png" type="image/x-icon">
+
+    <!-- css custom -->
+    <style>
+        /* CSS custom */
+        .container form{
+          margin-top: 100px;
+        }
+
+        .custom-form {
+            max-width: 500px; /* Lebar maksimum form */
+            margin: 0 auto; /* Posisi form di tengah */
+            padding: 20px; /* Ruang dalam form */
+            border: 2px solid #ccc; /* Atur border dengan ketebalan 1px dan warna abu-abu */
+            padding: 20px; /* Tambahkan padding untuk memberikan ruang di sekitar elemen form */
+            border-radius: 5px; /* Membuat sudut elemen form lebih lembut */
+        }
+    </style>
+
+    <title>View of Indonesia : Login</title>
+  </head>
+  <body>
+    <!-- awal navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info shadow-fm fixed-top">
+      <div class="container-md">
+        <a class="navbar-brand" href="#">
+          <img src="../img/logo.png" alt="" width="35" height="35" class="d-inline-block align-text-top" />
+          View Of Indonesian
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="../../Index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Ticket_Price.html">Ticket</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Status_User.html">Riwayat</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Login_Account.html">Login</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- akhir navbar -->
+
+    <!-- login pembuka -->
+    <div class="container">
+      <form class="custom-form needs-validation" novalidate onsubmit="submitForm(event)">
+          <div class="mb-3">
+              <label for="exampleInputUsername" class="form-label">Username</label>
+              <input type="text" class="form-control" id="exampleInputUsername" required>
+              <div class="invalid-feedback">
+                  Username Harap Diisi.
+              </div>
+          </div>
+          <div class="mb-3">  
+              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" required>
+              <div class="invalid-feedback">
+                  Password Harap Diisi.
+              </div>
+          </div>  
+          <p>Anda belum mempunyai akun? <a href="New_Account.html">Buat akun baru</a>.</p>
+          <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+  </div>
+    <!-- login penutup -->
+
+    </div>
+    <!-- jendela melayang -->
+    <div class="whatsapp-float">
+      <a href="https://wa.me/6281360640668" target="_blank">
+        <img src="../img/whatsapp.png" alt="WhatsApp" />
+      </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-info">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h5>Misi</h5>
+            <p>Memberikan pengalaman pemesanan tiket yang mudah, didukung oleh layanan pelanggan yang prima, sambil menjaga keamanan data pengguna.</p>
+          </div>
+          <div class="col-md-4">
+            <h5>Visi</h5>
+            <p>Menyediakan akses mudah dan pengalaman yang nyaman bagi pengguna dalam memesan tiket secara online, memperkaya perjalanan dan pengalaman wisata.</p>
+          </div>
+          <div class="col-md-4">
+            <h5>Follow Us</h5>
+            <ul class="footer-links">
+              <li>
+                <a href="https://www.facebook.com"><i class="bi bi-facebook"></i></a>
+              </li>
+              <li>
+                <a href="https://www.twitter.com"><i class="bi bi-twitter"></i></a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com"><i class="bi bi-instagram"></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <hr />
+        <p>&copy; 2023 ViewOfIndoensian.com</p>
+      </div>
+    </footer>
+    <!-- Akhir Footer -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+    <!-- script custom -->
+    <script src="../javascript/Login_Account.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px; /* Atur jarak dari bawah layar */
+  right: 20px; /* Atur jarak dari kanan layar */
+  z-index: 1000; /* Pastikan ikon berada di atas konten lain */
+}
+
+.whatsapp-float img {
+  width: 60px; /* Sesuaikan ukuran ikon WhatsApp */
+  height: auto;
+  border-radius: 50%; /* Untuk membuat ikon bulat */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Efek bayangan */
+  transition: transform 0.3s ease-in-out;
+}
+
+.whatsapp-float img:hover {
+  transform: scale(1.1); /* Efek perbesaran saat hover */
+}
