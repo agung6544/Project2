@@ -1,13 +1,20 @@
-// New_Account.js
-
 function submitForm(event) {
   event.preventDefault();
   const form = event.target;
 
-  if (form.checkValidity() === false) {
-    event.stopPropagation();
+  // Lakukan validasi input kosong pada username
+  const usernameInput = document.getElementById('exampleInputUsername');
+  const usernameErrorMessage = document.getElementById('usernameErrorMessage');
+
+  if (usernameInput.value.trim() === '') {
+    usernameInput.setCustomValidity('Silahkan Masukkan Username Akun Anda.');
     form.classList.add('was-validated');
+    // Sembunyikan pesan kesalahan jika input username kosong
+    usernameErrorMessage.style.display = 'none';
+    event.stopPropagation();
     return;
+  } else {
+    usernameInput.setCustomValidity('');
   }
 
   // Lakukan validasi lain di sini (misalnya, cocokkan kedua password)
@@ -16,19 +23,19 @@ function submitForm(event) {
 
   if (password1 !== password2) {
     const confirmPasswordInput = document.getElementById('exampleInputPassword2');
-    confirmPasswordInput.setCustomValidity('Passwords do not match.'); // Menambahkan pesan kesalahan kustom
-    form.classList.add('was-validated'); // Menampilkan pesan kesalahan
+    confirmPasswordInput.setCustomValidity('Passwords do not match.');
+    form.classList.add('was-validated');
     event.stopPropagation();
-    return; // Menghentikan pengiriman form jika password tidak cocok
+    return;
   } else {
     const confirmPasswordInput = document.getElementById('exampleInputPassword2');
-    confirmPasswordInput.setCustomValidity(''); // Menghapus pesan kesalahan jika password cocok
+    confirmPasswordInput.setCustomValidity('');
   }
 
   // Ambil data dari formulir
-  const username = document.getElementById('exampleInputUsername').value;
+  const username = usernameInput.value;
   const email = document.getElementById('exampleInputEmail').value;
-  const password = password1; // Gunakan password pertama, karena kita sudah memvalidasi bahwa keduanya cocok
+  const password = password1;
 
   // Buat objek data untuk dikirim ke server
   const data = {
@@ -50,9 +57,20 @@ function submitForm(event) {
       // Tanggapi hasil dari server di sini
       console.log(result);
 
-      // Arahkan ke halaman lain jika semuanya valid
-      if (form.checkValidity() && result.status === 'success') {
-        window.location.href = 'Login_Account.html';
+      if (result.status === 'error' && result.message.includes('Username already exists')) {
+        // Jika status error dan pesan kesalahan mengandung informasi bahwa username sudah ada
+        usernameErrorMessage.textContent = 'Username sudah ada.';
+        usernameErrorMessage.style.display = 'block';
+        form.classList.add('was-validated');
+        event.stopPropagation();
+      } else {
+        // Sembunyikan pesan kesalahan jika semuanya valid
+        usernameErrorMessage.style.display = 'none';
+
+        // Arahkan ke halaman lain jika semuanya valid
+        if (form.checkValidity() && result.status === 'success') {
+          window.location.href = 'Login_Account.html';
+        }
       }
     })
     .catch(error => {

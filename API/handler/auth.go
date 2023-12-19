@@ -9,6 +9,44 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+// ValidateAdminLogin method untuk validasi login admin
+func ValidateAdminLogin(c *fiber.Ctx) error {
+	db := database.DB.Db
+	input := new(struct {
+		Username string `json:"username"`
+		Password string `json:"password"`
+	})
+
+	// Parsing body request
+	if err := c.BodyParser(input); err != nil {
+		return c.Status(400).JSON(fiber.Map{"status": "error", "message": "Gagal memproses permintaan", "data": err})
+	}
+
+	// Mencari admin berdasarkan username
+	var admin model.Admin
+	result := db.Where("username = ?", input.Username).First(&admin)
+
+	if result.Error != nil {
+		// Handle admin not found
+		return c.Status(401).JSON(fiber.Map{"status": "error", "message": "Login failed. Admin not found.", "data": nil})
+	}
+
+	// Log informasi password dari database
+	fmt.Printf("Password from database: %s\n", admin.Password)
+
+	// Memeriksa kecocokan password
+	err := bcrypt.CompareHashAndPassword([]byte(admin.Password), []byte(input.Password))
+
+	if err != nil {
+		// Log kesalahan verifikasi password
+		fmt.Printf("Password verification failed: %v\n", err)
+		return c.Status(401).JSON(fiber.Map{"status": "error", "message": "Login failed. Invalid password.", "data": nil})
+	}
+
+	// Jika berhasil, kirim respons berhasil
+	return c.Status(200).JSON(fiber.Map{"status": "success", "message": "Login berhasil", "data": admin})
+}
+
 // ValidateLogin method untuk validasi login
 func ValidateLogin(c *fiber.Ctx) error {
 	db := database.DB.Db
@@ -56,6 +94,14 @@ func CreateUser(c *fiber.Ctx) error {
 	err := c.BodyParser(user)
 	if err != nil {
 		return c.Status(500).JSON(fiber.Map{"status": "error", "message": "Something's wrong with your input", "data": err})
+	}
+
+	// Check if the username already exists
+	var existingUser model.User
+	result := db.Where("username = ?", user.Username).First(&existingUser)
+	if result.RowsAffected > 0 {
+		// Username already exists, return an error
+		return c.Status(400).JSON(fiber.Map{"status": "error", "message": "Username already exists", "data": nil})
 	}
 
 	// Generate hashed password

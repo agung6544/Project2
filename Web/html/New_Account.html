@@ -65,13 +65,15 @@
     <!-- login pembuka -->
     <div class="container">
       <form class="custom-form needs-validation" novalidate onsubmit="submitForm(event)">
-          <div class="mb-3">
-              <label for="exampleInputUsername" class="form-label">Username</label>
-              <input type="text" class="form-control" id="exampleInputUsername" required>
-              <div class="invalid-feedback">
-                  Silahkan Masukkan Username Akun Anda.
-              </div>
+        <div class="mb-3">
+          <label for="exampleInputUsername" class="form-label">Username</label>
+          <input type="text" class="form-control" id="exampleInputUsername" required>
+          <div class="invalid-feedback">
+            Silahkan Masukkan Username Akun Anda.
           </div>
+          <!-- Tambahkan elemen untuk menampilkan pesan kesalahan username -->
+      <div id="usernameErrorMessage" class="text-danger"></div>
+        </div>
           <div class="mb-3">
             <label for="exampleInputEmail" class="form-label">Email</label>
             <input type="text" class="form-control" id="exampleInputEmail" required>

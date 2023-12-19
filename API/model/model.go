@@ -12,11 +12,11 @@ type Identifiable interface {
 
 // Define data struct required for User
 type User struct {
-	gorm.Model
-	ID       uuid.UUID `gorm:"type:uuid;"`
-	Username string    `json:"username"`
-	Email    string    `json:"email"`
-	Password string    `json:"password"`
+    gorm.Model
+    ID       uuid.UUID `gorm:"type:uuid;"`
+    Username string    `json:"username" gorm:"unique"`
+    Email    string    `json:"email"`
+    Password string    `json:"password"`
 }
 
 // Define data struct required for Admin

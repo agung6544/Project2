@@ -20,10 +20,11 @@ func SetupRoutes(app *fiber.App) {
 	user.Put("/:id", handler.UpdateUser)
 	user.Delete("/:id", handler.DeleteUserByID)
 
-	// User Group
+	// Admin Group
 	admin := api.Group("/admin")
 
-	// User Routes
+	// Admin Routes
+	admin.Post("/login", handler.ValidateAdminLogin)
 	admin.Get("/", handler.GetAllAdmin)
 	admin.Get("/:id", handler.GetSingleAdmin)
 	admin.Post("/", handler.CreateAdmin)

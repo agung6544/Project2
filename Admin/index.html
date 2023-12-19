@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./style/login.css" />
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="container">
+            <h2>Admin</h2>
+            <form id="loginForm">
+              <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" name="username" required />
+                <div class="error-message" id="usernameError"></div>
+              </div>
+              <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" name="password" required />
+                <div class="error-message" id="passwordError"></div>
+              </div>
+              <div class="d-flex justify-content-center">
+                <button type="button" class="btn btn-primary" onclick="validateLogin()">Login</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-6 d-flex align-items-center justify-content-center">
+          <div class="text-center">
+            <h1 class="mb-4">Welcome To Admin</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      async function validateLogin() {
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+    
+        // Mengirim permintaan HTTP POST ke endpoint login admin
+        const response = await fetch('http://localhost:8080/api/admin/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: username,
+            password: password,
+          }),
+        });
+    
+        const responseData = await response.json();
+    
+        if (response.ok) {
+          alert('Login Berhasil! Selamat datang, Admin!');
+          // Ganti URL di bawah ini dengan URL halaman berikutnya setelah login berhasil
+          window.location.href = './html/admin.html';
+        } else {
+          alert('Login Gagal. ' + responseData.message);
+        }
+      }
+    </script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
