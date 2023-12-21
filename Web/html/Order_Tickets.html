@@ -56,15 +56,15 @@
           <form>
             <div class="mb-3">
               <label for="inputNamaPemesan" class="form-label">Nama Pemesan</label>
-              <input type="text" class="form-control" id="inputNamaPemesan" required />
+              <input type="text" class="form-control" id="inputNamaPemesan" name="nama_pemesan" required />
             </div>
             <div class="mb-3">
               <label for="inputTanggalPemesanan" class="form-label">Tanggal Pemesanan</label>
-              <input type="date" class="form-control" id="inputTanggalPemesanan" required />
+              <input type="date" class="form-control" id="inputTanggalPemesanan" name="tanggal_pemesanan" required />
             </div>
             <div class="mb-3">
               <label for="inputTujuan" class="form-label">Pilih Tujuan</label>
-              <select class="form-select" id="inputTujuan" required>
+              <select class="form-select" id="inputTujuan" name="tujuan" required>
                 <option value="" disabled selected>Pilih Tujuan</option>
                 <option value="Pulau Jawa">Pulau Jawa</option>
                 <option value="Pulau Sumatera">Pulau Sumatera</option>
@@ -75,7 +75,7 @@
             </div>
             <div class="mb-3">
               <label for="inputWisata" class="form-label">Pilih Wisata</label>
-              <select class="form-select" id="inputWisata" required>
+              <select class="form-select" id="inputWisata" name="wisata" required>
                 <option selected disabled value="">Pilih Wisata</option>
                 <option value="Danau Toba">Danau Toba</option>
                 <option value="Bukit Lawang">Bukit Lawang</option>
@@ -98,7 +98,7 @@
             </div>
             <div class="mb-3">
               <label for="inputHargaTicket" class="form-label">Harga Tiket</label>
-              <input type="text" class="form-control" id="inputHargaTicket" readonly />
+              <input type="text" class="form-control" id="inputHargaTicket" name="harga_ticket" readonly />
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>

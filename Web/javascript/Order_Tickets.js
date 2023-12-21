@@ -1,3 +1,5 @@
+// Order_Tickets.js
+
 // Ambil elemen select
 const tujuanSelect = document.getElementById('inputTujuan');
 const wisataSelect = document.getElementById('inputWisata');
@@ -33,17 +35,9 @@ function updateDestinasi() {
 // Tambahkan event listener pada perubahan nilai pada tujuan
 tujuanSelect.addEventListener('change', updateDestinasi);
 
-// kode booking
-document.addEventListener('DOMContentLoaded', function () {
-  const form = document.querySelector('form');
-  form.addEventListener('submit', function (event) {
-    event.preventDefault(); // Menghentikan default behavior pengiriman form
-    window.location.href = 'Pay_Tickets.html'; // Mengarahkan ke form2.html setelah tombol submit ditekan
-  });
-});
-
+// Fungsi untuk mengupdate harga tiket berdasarkan pilihan wisata
 function updateHargaTicket() {
-  const selectedDestination = wisataSelect.value; // Get the selected destination
+  const selectedDestination = wisataSelect.value;
 
   const ticketPrices = {
     'Danau Toba': 20000,
@@ -64,38 +58,43 @@ function updateHargaTicket() {
     'Pasar Terapung Lok Baintan': 20000,
   };
 
-  const inputHargaTicket = document.getElementById('inputHargaTicket'); // Find the ticket price input field
+  const inputHargaTicket = document.getElementById('inputHargaTicket');
 
-  // Update the ticket price field with the selected destination's price
+  // Update harga tiket sesuai dengan pilihan wisata
   inputHargaTicket.value = ticketPrices[selectedDestination] || 'Pilih Tujuan terlebih dahulu';
 }
 
 // Add an event listener to the 'inputWisata' dropdown for changes
 wisataSelect.addEventListener('change', updateHargaTicket);
 
-// Call updateDestinasi initially to set up initial options
-updateDestinasi();
+// Fungsi untuk mengirim data tiket ke endpoint /api/tiket
+function submitOrder(event) {
+  event.preventDefault();
 
-document.querySelector('form').addEventListener('submit', function (event) {
-  event.preventDefault(); // Menghentikan form dari pengiriman
+  const form = event.target;
+  const formData = new FormData(form);
 
-  window.location.href = 'Pay_Tickets.html';
-});
+  fetch('http://localhost:8080/api/tiket', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(Object.fromEntries(formData)),
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === 'success') {
+        alert('Pemesanan tiket berhasil!');
+        // Tambahkan logika atau navigasi ke halaman lain jika diperlukan
+      } else {
+        alert('Pemesanan tiket gagal. Silakan coba lagi.');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Terjadi kesalahan. Silakan coba lagi.');
+    });
+}
 
-document.querySelector('form').addEventListener('submit', function (event) {
-  event.preventDefault(); // Menghentikan form dari pengiriman
-
-  // Simpan nilai inputBooking, inputNamaPemesan, inputTanggalPemesanan, inputTujuan ke dalam localStorage
-  const inputBookingValue = document.getElementById('inputBooking').value;
-  const inputNamaPemesanValue = document.getElementById('inputNamaPemesan').value;
-  const inputTanggalPemesananValue = document.getElementById('inputTanggalPemesanan').value;
-  const inputTujuanValue = document.getElementById('inputTujuan').value;
-
-  localStorage.setItem('bookingCode', inputBookingValue);
-  localStorage.setItem('namaPemesan', inputNamaPemesanValue);
-  localStorage.setItem('tanggalPemesanan', inputTanggalPemesananValue);
-  localStorage.setItem('tujuanWisata', inputTujuanValue);
-
-  // Pindahkan ke halaman status.html
-  window.location.href = 'Status_User.html';
-});
+// Add an event listener for form submission
+document.querySelector('form').addEventListener('submit', submitOrder);

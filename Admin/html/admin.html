@@ -13,10 +13,18 @@
           <li><a href="admin.html">Dashboard</a></li>
           <li><a href="user.html">Users</a></li>
           <li><a href="pembayaran.html">Pembayaran</a></li>
-          <!-- Tambahkan menu sesuai kebutuhan -->
-        </ul>
-    </div>
-    
+          <li><a href="#" onclick="confirmLogout()">Logout</a></li>
+      </ul>
+  </div>
+  
+  <script>
+      function confirmLogout() {
+          var confirmLogout = confirm("Logout?");
+          if (confirmLogout) {
+              window.location.href = "../index.html";
+          } else {}
+      }
+  </script>
       <div class="content">
         <!-- Konten utama admin dashboard -->
         <h1>Welcome, Admin</h1>

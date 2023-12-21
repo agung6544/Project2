@@ -1,3 +1,4 @@
+// tiket.go
 package handler
 
 import (
@@ -73,8 +74,8 @@ func UpdateTiket(c *fiber.Ctx) error {
     }
 
     // Update fields as needed
-    tiket.Username = updateTiketData.Username
-    tiket.Password = updateTiketData.Password
+    // Example: tiket.SomeField = updateTiketData.SomeField
+    // You can update other fields as needed
 
     db.Save(&tiket)
 

@@ -39,7 +39,7 @@ function submitForm(event) {
         alert('Selamat, Anda telah berhasil login.');
       } else {
         // Tampilkan pesan kesalahan jika autentikasi gagal
-        alert('Login failed. Please check your credentials.');
+        alert('Login failed.\nPlease check your username and password');
       }
     })
     .catch((error) => {

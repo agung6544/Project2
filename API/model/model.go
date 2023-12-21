@@ -27,11 +27,15 @@ type Admin struct {
     Password string    `json:"password"`
 }
 
+// Define data struct required for Tiket
 type Tiket struct {
     gorm.Model
-    ID       uuid.UUID `gorm:"type:uuid;"`
-    Username string    `json:"username"`
-    Password string    `json:"password"`
+    ID         uuid.UUID `gorm:"type:uuid;"`
+    NamaPemesan string    `json:"nama_pemesan"`
+    TanggalPemesanan string `json:"tanggal_pemesanan"`
+    Tujuan     string    `json:"tujuan"`
+    Wisata     string    `json:"wisata"`
+    HargaTicket string   `json:"harga_ticket"`
 }
 
 // Users struct
