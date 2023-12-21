@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="Web/style/Index.css" />
+    <link rel="stylesheet" href="../style/Index.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-    <link rel="stylesheet" href="Web/style/footer.css" />
-    <link rel="stylesheet" href="Web/style/pop.css" />
+    <link rel="stylesheet" href="../style/footer.css" />
+    <link rel="stylesheet" href="../style/pop.css" />
     <!-- icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
     <!-- icon tab -->
-    <link rel="icon" href="./Web/img/logo.png" type="image/x-icon" />
+    <link rel="icon" href="../img/logo.png" type="image/x-icon" />
 
     <title>Welcome : View of Indonesia</title>
   </head>
@@ -19,7 +19,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-info shadow-fm fixed-top">
       <div class="container-md">
         <a class="navbar-brand" href="#">
-          <img src="./Web/img/logo.png" alt="" width="35" height="35" class="d-inline-block align-text-top" />
+          <img src="../img/logo.png" alt="" width="35" height="35" class="d-inline-block align-text-top" />
           View Of Indonesian
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,13 +28,16 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="Index.html">Home</a>
+              <a class="nav-link active" aria-current="page" href="user.html">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./Web/html/index_ticket.html">Ticket</a>
+              <a class="nav-link" href="Ticket_Price.html">Ticket</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="Web/html/Login_Account.html">Login</a>
+              <a class="nav-link" href="Status_User.html">Riwayat</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="konfirmasiLogout()">Logout</a>
             </li>
           </ul>
         </div>
@@ -42,7 +45,7 @@
     </nav>
     <!-- akhir navbar -->
 
-    <div class="search-section" style="background-image: url('Web/img/Header.jpg')">
+    <div class="search-section" style="background-image: url('../img/Header.jpg')">
       <h1 class="view-of-indonesian">View of Indonesian</h1>
     </div>
 
@@ -54,7 +57,7 @@
       <div class="row row-cols-1 row-cols-md-4 g-3">
         <div class="col">
           <div class="card">
-            <img src="Web/img/CandiBorobudur.jpg" class="card-img-top" alt="..." />
+            <img src="../img/CandiBorobudur.jpg" class="card-img-top" alt="..." />
             <div class="card-body">
               <h5 class="card-title">Candi Borobudur</h5>
               <p class="card-text">
@@ -66,7 +69,7 @@
         </div>
         <div class="col">
           <div class="card">
-            <img src="Web/img/GunungBromo.jpg" class="card-img-top" alt="..." />
+            <img src="../img/GunungBromo.jpg" class="card-img-top" alt="..." />
             <div class="card-body">
               <h5 class="card-title">Gunung Bromo</h5>
               <p class="card-text">
@@ -78,7 +81,7 @@
         </div>
         <div class="col">
           <div class="card">
-            <img src="Web/img/Kawaijen.jpeg" class="card-img-top" alt="..." />
+            <img src="../img//Kawaijen.jpeg" class="card-img-top" alt="..." />
             <div class="card-body">
               <h5 class="card-title">Kawa Ijen</h5>
               <p class="card-text">
@@ -90,7 +93,7 @@
         </div>
         <div class="col">
           <div class="card">
-            <img src="Web/img/TamanSafari.jpeg" class="card-img-top" alt="..." />
+            <img src="../img/TamanSafari.jpeg" class="card-img-top" alt="..." />
             <div class="card-body">
               <h5 class="card-title">Taman Safari</h5>
               <p class="card-text">
@@ -109,7 +112,7 @@
         <div class="row row-cols-1 row-cols-md-4 g-3">
           <div class="col">
             <div class="card">
-              <img src="Web/img/toba.jpg" class="card-img-top" alt="..." />
+              <img src="../img/toba.jpg" class="card-img-top" alt="..." />
               <div class="card-body">
                 <h5 class="card-title">Danau Toba</h5>
                 <p class="card-text">
@@ -121,7 +124,7 @@
           </div>
           <div class="col">
             <div class="card">
-              <img src="Web/img/BukitLawang.jpg" class="card-img-top" alt="..." />
+              <img src="../img/BukitLawang.jpg" class="card-img-top" alt="..." />
               <div class="card-body">
                 <h5 class="card-title">Bukit Lawang</h5>
                 <p class="card-text">
@@ -133,7 +136,7 @@
           </div>
           <div class="col">
             <div class="card">
-              <img src="Web/img/KerinciValley.jpg" class="card-img-top" alt="..." />
+              <img src="../img/KerinciValley.jpg" class="card-img-top" alt="..." />
               <div class="card-body">
                 <h5 class="card-title">Kerinci Valley</h5>
                 <p class="card-text">
@@ -145,7 +148,7 @@
           </div>
           <div class="col">
             <div class="card">
-              <img src="Web/img/Taman Nasional Gunung Leuser.png" class="card-img-top" alt="..." />
+              <img src="../img/Taman Nasional Gunung Leuser.png" class="card-img-top" alt="..." />
               <div class="card-body">
                 <h5 class="card-title">Taman Nasional Gunung Leuser</h5>
                 <p class="card-text">
@@ -164,7 +167,7 @@
       <!-- button pembuka -->
 
       <div class="d-flex justify-content-center mb-5">
-        <a href="Web/html/index_wisata.html" class="btn btn-info" id="hargaTicket">Wisata Lainnya</a>
+        <a href="wisata.html" class="btn btn-info" id="hargaTicket">Wisata Lainnya</a>
       </div>
 
       <!-- Button Penutup -->
@@ -210,5 +213,6 @@
     <!-- Akhir Footer -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="../javascript/script.js"></script>
   </body>
 </html>

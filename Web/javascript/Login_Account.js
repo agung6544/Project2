@@ -21,26 +21,28 @@ function submitForm(event) {
   fetch('http://localhost:8080/api/validate-login', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       username: username,
-      password: password
-    })
+      password: password,
+    }),
   })
-    .then(response => response.json())
-    .then(result => {
+    .then((response) => response.json())
+    .then((result) => {
       // ...
 
       // Arahkan ke halaman lain jika autentikasi berhasil
       if (form.checkValidity() && result.status === 'success') {
-        window.location.href = 'Order_Tickets.html';
+        window.location.href = 'user.html';
+
+        alert('Selamat, Anda telah berhasil login.');
       } else {
         // Tampilkan pesan kesalahan jika autentikasi gagal
         alert('Login failed. Please check your credentials.');
       }
     })
-    .catch(error => {
+    .catch((error) => {
       console.error('Error:', error);
     });
 }

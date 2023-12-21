@@ -41,19 +41,19 @@ function submitForm(event) {
   const data = {
     username: username,
     email: email,
-    password: password
+    password: password,
   };
 
   // Lakukan permintaan HTTP POST ke endpoint user (ganti URL dengan endpoint yang sesuai)
   fetch('http://localhost:8080/api/user', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   })
-    .then(response => response.json())
-    .then(result => {
+    .then((response) => response.json())
+    .then((result) => {
       // Tanggapi hasil dari server di sini
       console.log(result);
 
@@ -70,10 +70,12 @@ function submitForm(event) {
         // Arahkan ke halaman lain jika semuanya valid
         if (form.checkValidity() && result.status === 'success') {
           window.location.href = 'Login_Account.html';
+
+          alert('Akun Anda Berhasil Ditambahkan.');
         }
       }
     })
-    .catch(error => {
+    .catch((error) => {
       console.error('Error:', error);
     });
 }
