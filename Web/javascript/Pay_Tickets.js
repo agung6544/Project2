@@ -1,27 +1,67 @@
-// Daftar metode pembayaran beserta nomor rekening
 const metodePembayaran = {
-  'Bank Negara Indoensia': '9876543210',
+  'Bank Negara Indonesia': '9876543210',
   'Bank Republik Indonesia': '0123456789',
   'Bank Central Asia': '0987654321',
   Dana: '082423763748',
   Ovo: '082347362381',
 };
 
-// Fungsi untuk mengisi nomor rekening sesuai dengan metode pembayaran yang dipilih
 document.getElementById('inputMetodePembayaran').addEventListener('change', function () {
   const selectedMetode = this.value;
+  const inputNomorRekening = document.getElementById('inputNomorRekening');
 
-  // Isi inputNomorRekening dengan nomor rekening yang sesuai
-  document.getElementById('inputNomorRekening').value = metodePembayaran[selectedMetode];
+  inputNomorRekening.value = metodePembayaran[selectedMetode] || '';
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-  // Menggunakan event listener untuk menangani submit form
-  document.querySelector('form').addEventListener('submit', function (event) {
-    // Menghentikan perilaku default form submit agar tidak refresh halaman
-    event.preventDefault();
+document.addEventListener('DOMContentLoaded', function () {});
 
-    // Navigasi ke status.html saat tombol submit ditekan
-    window.location.href = 'Status_User.html';
-  });
-});
+function submitPayment(event) {
+  event.preventDefault();
+
+  const orderData = JSON.parse(localStorage.getItem('orderData'));
+
+  if (!orderData) {
+    alert('Data pesanan tidak ditemukan. Silakan pesan tiket terlebih dahulu.');
+    return;
+  }
+
+  const form = event.target;
+  const paymentFormData = new FormData(form);
+  const combinedFormData = new FormData();
+
+  // Tambahkan data pesanan
+  for (const [key, value] of Object.entries(orderData)) {
+    combinedFormData.append(key, value);
+  }
+
+  // Tambahkan data pembayaran
+  for (const [key, value] of paymentFormData.entries()) {
+    combinedFormData.append(key, value);
+  }
+
+  // Ubah objek FormData menjadi objek JavaScript biasa
+  const combinedDataObject = Object.fromEntries(combinedFormData);
+
+  fetch('http://localhost:8080/api/tiket', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(combinedDataObject),
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === 'success') {
+        alert('Pemesanan tiket berhasil!');
+        window.location.href = 'Status_User.html';
+      } else {
+        alert('Pemesanan tiket gagal. Silakan coba lagi.');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Terjadi kesalahan. Silakan coba lagi.');
+    });
+}
+
+document.querySelector('form').addEventListener('submit', submitPayment);

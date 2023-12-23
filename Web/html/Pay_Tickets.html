@@ -77,27 +77,24 @@
           <h4>Pembayaran</h4>
           <p>PT.View of Indonesia</p>
           <hr />
-          <form method="post">
-            <div class="mb-3">
-              <label for="inputMetodePembayaran" class="form-label">Metode Pembayaran</label>
-              <select class="form-select" id="inputMetodePembayaran" required>
-                <option value="" disabled selected>Pilih Metode Pembayaran</option>
-                <option value="Bank Negara Indoensia">Bank Negara Indoensia</option>
-                <option value="Bank Republik Indonesia">Bank Republik Indonesia</option>
-                <option value="Bank Central Asia">Bank Central Asia</option>
-                <option value="Dana">Dana</option>
-                <option value="Ovo">Ovo</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label for="inputNomorRekening" class="form-label">Nomor Rekening</label>
-              <input type="text" class="form-control" id="inputNomorRekening" readonly />
-            </div>
-            <div class="mb-3">
-              <label for="inputBuktiPembayaran" class="form-label">Kirim bukti pengiriman (PNG, JPG, JPEG)</label>
-              <input type="file" class="form-control" id="inputBuktiPembayaran" accept="image/png, image/jpeg" required />
-            </div>
-            <button type="submit" class="btn btn-primary">SUBMIT</button>
+          <form>
+              <div class="mb-3">
+                <label for="inputMetodePembayaran" class="form-label">Metode Pembayaran</label>
+                <select class="form-select" id="inputMetodePembayaran" name="metode_pembayaran" required>
+                  <option value="" disabled selected>Pilih Metode Pembayaran</option>
+                  <option value="Bank Negara Indoensia">Bank Negara Indoensia</option>
+                  <option value="Bank Republik Indonesia">Bank Republik Indonesia</option>
+                  <option value="Bank Central Asia">Bank Central Asia</option>
+                  <option value="Dana">Dana</option>
+                  <option value="Ovo">Ovo</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="inputNomorRekening" class="form-label">Nomor Rekening</label>
+                <input type="text" class="form-control" id="inputNomorRekening" name="nomor_rekening" readonly />
+              </div>
+              </div>
+              <button type="submit" class="btn btn-primary">SUBMIT</button>
           </form>
         </div>
       </div>

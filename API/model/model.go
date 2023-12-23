@@ -36,6 +36,9 @@ type Tiket struct {
     Tujuan     string    `json:"tujuan"`
     Wisata     string    `json:"wisata"`
     HargaTicket string   `json:"harga_ticket"`
+    MetodePembayaran string    `json:"metode_pembayaran"`
+    NomorRekening string    `json:"nomor_rekening"`
+
 }
 
 // Users struct
