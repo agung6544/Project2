@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../style/cetak.css">
+    <title>Bukti Pembayaran</title>
+</head>
+<body>
+    <h4>Bukti Pembayaran</h4>
+    <div class="container">
+        <div id="buktiPembayaranContent">
+            <script>
+                // Retrieve data from local storage
+                const buktiPembayaranData = JSON.parse(localStorage.getItem('buktiPembayaranData'));
+        
+                // Display content on the page
+                document.getElementById('buktiPembayaranContent').innerText = `
+                    Metode Pembayaran:\n ${buktiPembayaranData.metodePembayaran}
+                    \nTanggal Pemesanan:\n ${buktiPembayaranData.createdAt}
+                    \nNomor Rekening:\n ${buktiPembayaranData.nomorRekening}
+                `;
+        
+                // Print automatically (you can replace this with your actual print logic)
+                window.print();
+            </script>
+        </div>
+    </div>
+</body>
+</html>

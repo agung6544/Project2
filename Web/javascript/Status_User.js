@@ -1,3 +1,5 @@
+
+// Function to fetch data and update the table
 document.addEventListener('DOMContentLoaded', function () {
   // Mendapatkan username dari local storage
   const username = localStorage.getItem('username');
@@ -10,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (data && data.data && data.data.length > 0) {
         // Menampilkan nilai-nilai tersebut di tabel
         const ticketTable = document.getElementById('ticketTable');
-        
+
         // Kosongkan tabel sebelum menambahkan data baru
         ticketTable.innerHTML = '';
 
@@ -21,10 +23,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const cell2 = row.insertCell(1);
         const cell3 = row.insertCell(2);
         const cell4 = row.insertCell(3);
+        const cell5 = row.insertCell(4);
         cell1.innerHTML = "<b>Nama Pemesan</b>";
         cell2.innerHTML = "<b>Wisata</b>";
-        cell3.innerHTML = "<b>Check In Tiket</b>";
+        cell3.innerHTML = "<b>Tanggal Pemesanan</b>";
         cell4.innerHTML = "<b>Status</b>";
+        cell5.innerHTML = "<b>Aksi</b>";
 
         // Iterasi melalui setiap tiket dalam array data
         data.data.forEach(tiket => {
@@ -34,6 +38,10 @@ document.addEventListener('DOMContentLoaded', function () {
             <td>${tiket.wisata}</td>
             <td>${tiket.tanggal_pemesanan}</td>
             <td>Valid</td>
+            <td>
+              <button onclick="cetakBuktiPembayaran('${tiket.metode_pembayaran}', '${tiket.CreatedAt}', '${tiket.nomor_rekening}')">Cetak Bukti Pembayaran</button>
+              <button onclick="cetakTiket('${tiket.ID}', '${tiket.nama_pemesan}', '${tiket.wisata}')">Cetak Tiket</button>
+            </td>
           `;
         });
       } else {
@@ -41,4 +49,29 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     })
     .catch(error => console.error('Error:', error));
+
+  // Function to print payment receipt
+  window.cetakBuktiPembayaran = function (metodePembayaran, createdAt, nomorRekening) {
+    // Store data in local storage
+    localStorage.setItem('buktiPembayaranData', JSON.stringify({
+      metodePembayaran,
+      createdAt,
+      nomorRekening
+    }));
+
+    // Cetak bukti pembayaran
+    window.location.href = 'cetak_buktipembayaran.html'; // Gantilah dengan logika cetak sesuai kebutuhan
+  }
+
+  // Function to print ticket
+  window.cetakTiket = function (id, namaPemesan, wisata) {
+      // Store data in local storage
+    localStorage.setItem('tiketData', JSON.stringify({
+      id,
+      namaPemesan,
+      wisata
+    }));
+    // Cetak tiket
+    window.location.href = 'cetak_tiket.html';
+  }
 });

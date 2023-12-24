@@ -68,6 +68,7 @@
             <th scope="col">Wisata</th>
             <th scope="col">Tanggal Pemesanan</th>
             <th scope="col">Status</th>
+            <th scope="col">Aksi</th>
           </tr>
         </thead>
         <tbody>
@@ -77,6 +78,10 @@
             <td><span id="displayTujuanWisata"></span></td>
             <td><span id="displayTanggalPemesanan"></span></td>
             <td>Valid</td>
+            <td>
+              <button onclick="cetakBuktiPembayaran()">Cetak Bukti Pembayaran</button>
+              <button onclick="cetakTiket()">Cetak Tiket</button>
+            </td>
           </tr>
           <!-- Tambahkan baris-baris data lainnya sesuai kebutuhan -->
         </tbody>

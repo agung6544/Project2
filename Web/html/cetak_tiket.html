@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../style/cetak.css">
+    <title>Tiket</title>
+</head>
+<body>
+    <h4>TIKET</h4>
+    <div class="container">
+        <div id="tiketContent">
+            <script>
+                // Retrieve data from local storage
+                const tiketData = JSON.parse(localStorage.getItem('tiketData'));
+        
+                // Display content on the page
+                document.getElementById('tiketContent').innerText = `
+                  Kode Tiket:\n ${tiketData.id}
+                  \nNama Pemesan:\n ${tiketData.namaPemesan}
+                  \nWisata:\n ${tiketData.wisata}
+                `;
+        
+                // Print automatically (you can replace this with your actual print logic)
+                window.print();
+            </script>
+        </div>
+    </div>
+</body>
+</html>
