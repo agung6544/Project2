@@ -33,14 +33,16 @@ document.addEventListener('DOMContentLoaded', function () {
         // Iterasi melalui setiap tiket dalam array data
         data.data.forEach(tiket => {
           const row = ticketTable.insertRow();
+          const formattedDate = new Date(tiket.CreatedAt).toISOString().split('T')[0];
+
           row.innerHTML = `
             <td>${tiket.nama_pemesan}</td>
             <td>${tiket.wisata}</td>
             <td>${tiket.tanggal_pemesanan}</td>
             <td>Valid</td>
             <td>
-              <button onclick="cetakBuktiPembayaran('${tiket.metode_pembayaran}', '${tiket.CreatedAt}', '${tiket.nomor_rekening}')">Cetak Bukti Pembayaran</button>
-              <button onclick="cetakTiket('${tiket.ID}', '${tiket.nama_pemesan}', '${tiket.wisata}')">Cetak Tiket</button>
+              <button onclick="cetakBuktiPembayaran('${tiket.metode_pembayaran}', '${formattedDate}', '${tiket.nomor_rekening}', '${tiket.harga_ticket}')">Cetak Bukti Pembayaran</button>
+              <button onclick="cetakTiket('${tiket.ID}','${tiket.tanggal_pemesanan}', '${tiket.nama_pemesan}', '${tiket.wisata}')">Cetak Tiket</button>
             </td>
           `;
         });
@@ -51,12 +53,13 @@ document.addEventListener('DOMContentLoaded', function () {
     .catch(error => console.error('Error:', error));
 
   // Function to print payment receipt
-  window.cetakBuktiPembayaran = function (metodePembayaran, createdAt, nomorRekening) {
+  window.cetakBuktiPembayaran = function (metodePembayaran, createdAt, nomorRekening, harga) {
     // Store data in local storage
     localStorage.setItem('buktiPembayaranData', JSON.stringify({
       metodePembayaran,
       createdAt,
-      nomorRekening
+      nomorRekening,
+      harga
     }));
 
     // Cetak bukti pembayaran
@@ -64,10 +67,11 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Function to print ticket
-  window.cetakTiket = function (id, namaPemesan, wisata) {
+  window.cetakTiket = function (id, tanggalPemesanan, namaPemesan, wisata) {
       // Store data in local storage
     localStorage.setItem('tiketData', JSON.stringify({
       id,
+      tanggalPemesanan,
       namaPemesan,
       wisata
     }));
