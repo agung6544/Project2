@@ -40,3 +40,13 @@ body {
   margin-left: 250px; /* Sesuaikan margin agar konten tidak tumpang tindih dengan sidebar */
   padding: 20px;
 }
+
+.btn.btn-primary {
+  background-color: #6a6a6a;
+  color: #ffffff;
+}
+
+.btn.btn-primary:hover {
+  background-color: rgb(40, 36, 36);
+  color: hsl(0, 0%, 100%);
+}

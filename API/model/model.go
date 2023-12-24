@@ -17,6 +17,7 @@ type User struct {
     Username string    `json:"username" gorm:"unique"`
     Email    string    `json:"email"`
     Password string    `json:"password"`
+    DecodedPassword string `json:"decoded_password"`
 }
 
 // Define data struct required for Admin

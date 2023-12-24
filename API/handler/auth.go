@@ -104,6 +104,9 @@ func CreateUser(c *fiber.Ctx) error {
 		return c.Status(400).JSON(fiber.Map{"status": "error", "message": "Username already exists", "data": nil})
 	}
 
+	// Decode the password and store it in the decoded_password field
+	user.DecodedPassword = user.Password
+
 	// Generate hashed password
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
 	if err != nil {
