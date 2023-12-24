@@ -37,6 +37,6 @@ func SetupRoutes(app *fiber.App) {
 	// Tiket Routes
 	tiket.Get("/", handler.GetAllTiket)
 	tiket.Post("/", handler.CreateTiket)
-
+	tiket.Get("/:username", handler.GetAllTiketByUsername)
 	app.Post("/api/validate-login", handler.ValidateLogin)
 }

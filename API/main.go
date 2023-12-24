@@ -21,7 +21,6 @@ func main() {
 	router.SetupRoutes(app)
 
 	app.Post("/api/validate-login", handler.ValidateLogin)  // Daftarkan endpoint untuk validasi login
-
 	app.Use(func(c *fiber.Ctx) error {
 		return c.SendStatus(404)
 	})

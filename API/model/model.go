@@ -31,6 +31,7 @@ type Admin struct {
 type Tiket struct {
     gorm.Model
     ID         uuid.UUID `gorm:"type:uuid;"`
+    Username     string    `json:"username"`
     NamaPemesan string    `json:"nama_pemesan"`
     TanggalPemesanan string `json:"tanggal_pemesanan"`
     Tujuan     string    `json:"tujuan"`
@@ -38,7 +39,6 @@ type Tiket struct {
     HargaTicket string   `json:"harga_ticket"`
     MetodePembayaran string    `json:"metode_pembayaran"`
     NomorRekening string    `json:"nomor_rekening"`
-
 }
 
 // Users struct

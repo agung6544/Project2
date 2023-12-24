@@ -19,11 +19,14 @@ function submitPayment(event) {
   event.preventDefault();
 
   const orderData = JSON.parse(localStorage.getItem('orderData'));
-
-  if (!orderData) {
+  const username = localStorage.getItem('username');
+  
+  if (!orderData || !username) {
     alert('Data pesanan tidak ditemukan. Silakan pesan tiket terlebih dahulu.');
     return;
   }
+// Add username to orderData
+  orderData.username = username;
 
   const form = event.target;
   const paymentFormData = new FormData(form);

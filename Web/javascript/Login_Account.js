@@ -35,7 +35,7 @@ function submitForm(event) {
       // Arahkan ke halaman lain jika autentikasi berhasil
       if (form.checkValidity() && result.status === 'success') {
         window.location.href = 'user.html';
-
+        localStorage.setItem('username', username);
         alert('Selamat, Anda telah berhasil login.');
       } else {
         // Tampilkan pesan kesalahan jika autentikasi gagal

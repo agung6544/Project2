@@ -26,6 +26,21 @@ func CreateTiket(c *fiber.Ctx) error {
     return c.Status(201).JSON(fiber.Map{"status": "success", "message": "Tiket has been created", "data": tiket})
 }
 
+// Get All Tiket by Username from db
+func GetAllTiketByUsername(c *fiber.Ctx) error {
+    db := database.DB.Db
+    username := c.Params("username")
+    var tikets []model.Tiket
+
+    db.Where("username = ?", username).Find(&tikets)
+
+    if len(tikets) == 0 {
+        return c.Status(404).JSON(fiber.Map{"status": "error", "message": "Tiket not found for the specified username", "data": nil})
+    }
+
+    return c.Status(200).JSON(fiber.Map{"status": "success", "message": "Tiket Found", "data": tikets})
+}
+
 // Get All Tiket from db
 func GetAllTiket(c *fiber.Ctx) error {
     db := database.DB.Db
