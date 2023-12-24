@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const cell4 = row.insertCell(3);
         cell1.innerHTML = "<b>Nama Pemesan</b>";
         cell2.innerHTML = "<b>Wisata</b>";
-        cell3.innerHTML = "<b>Tanggal Pemesanan</b>";
+        cell3.innerHTML = "<b>Check In Tiket</b>";
         cell4.innerHTML = "<b>Status</b>";
 
         // Iterasi melalui setiap tiket dalam array data

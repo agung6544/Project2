@@ -33,7 +33,20 @@ function updateHargaTicket() {
   const ticketPrices = {
     'Danau Toba': 20000,
     'Bukit Lawang': 25000,
-    // ... (Tambahkan harga untuk destinasi lainnya)
+    'Kerinci Valley': 20000,
+    'Taman Nasional Gunung Leuser': 15000,
+    'Candi Borobudur': 15000,
+    'Gunung Bromo': 45000,
+    'Kawa Ijen': 20000,
+    'Taman Safari': 50000,
+    'Pura Besakih': 50000,
+    'Waterbom Bali': 50000,
+    'Taman Nusa': 40000,
+    'Pantai Kuta': 50000,
+    'Taman Nasional Tanjung Puting': 20000,
+    'Pulau Kakaban': 25000,
+    'Gunung Kinabalu': 45000,
+    'Pasar Terapung Lok Baintan': 20000,
   };
 
   inputHargaTicket.value = ticketPrices[selectedDestination] || 'Pilih Tujuan terlebih dahulu';
