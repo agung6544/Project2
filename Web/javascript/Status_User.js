@@ -30,22 +30,27 @@ document.addEventListener('DOMContentLoaded', function () {
         cell4.innerHTML = "<b>Status</b>";
         cell5.innerHTML = "<b>Aksi</b>";
 
-        // Iterasi melalui setiap tiket dalam array data
-        data.data.forEach(tiket => {
-          const row = ticketTable.insertRow();
-          const formattedDate = new Date(tiket.CreatedAt).toISOString().split('T')[0];
+    // Iterasi melalui setiap tiket dalam array data
+  data.data.forEach(tiket => {
+    const row = ticketTable.insertRow();
 
-          row.innerHTML = `
-            <td>${tiket.nama_pemesan}</td>
-            <td>${tiket.wisata}</td>
-            <td>${tiket.tanggal_pemesanan}</td>
-            <td>Valid</td>
-            <td>
-              <button onclick="cetakBuktiPembayaran('${tiket.metode_pembayaran}', '${formattedDate}', '${tiket.nomor_rekening}', '${tiket.harga_ticket}')">Cetak Bukti Pembayaran</button>
-              <button onclick="cetakTiket('${tiket.ID}','${tiket.tanggal_pemesanan}', '${tiket.nama_pemesan}', '${tiket.wisata}')">Cetak Tiket</button>
-            </td>
-          `;
-        });
+  // Mengonversi string tanggal menjadi objek Date
+  const createdDate = new Date(tiket.created_at);
+
+  // Membangun format tanggal yang diinginkan (YYYY-MM-DD)
+  const formattedDate = `${createdDate.getFullYear()}-${String(createdDate.getMonth() + 1).padStart(2, '0')}-${String(createdDate.getDate()).padStart(2, '0')}`;
+
+  row.innerHTML = `
+    <td>${tiket.nama_pemesan}</td>
+    <td>${tiket.wisata}</td>
+    <td>${formattedDate}</td>
+    <td>Valid</td>
+    <td>
+      <button onclick="cetakBuktiPembayaran('${tiket.metode_pembayaran}', '${formattedDate}', '${tiket.nomor_rekening}', '${tiket.harga_ticket}')">Cetak Bukti Pembayaran</button>
+      <button onclick="cetakTiket('${tiket.ID}','${tiket.tanggal_pemesanan}', '${tiket.nama_pemesan}', '${tiket.wisata}')">Cetak Tiket</button>
+    </td>
+  `;
+});
       } else {
         console.error('Data tiket tidak ditemukan untuk username:', username);
       }
@@ -53,11 +58,11 @@ document.addEventListener('DOMContentLoaded', function () {
     .catch(error => console.error('Error:', error));
 
   // Function to print payment receipt
-  window.cetakBuktiPembayaran = function (metodePembayaran, createdAt, nomorRekening, harga) {
+  window.cetakBuktiPembayaran = function (metodePembayaran, formattedDate, nomorRekening, harga) {
     // Store data in local storage
     localStorage.setItem('buktiPembayaranData', JSON.stringify({
       metodePembayaran,
-      createdAt,
+      formattedDate,
       nomorRekening,
       harga
     }));

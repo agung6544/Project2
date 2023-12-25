@@ -17,7 +17,7 @@
                 // Display content on the page
                 document.getElementById('buktiPembayaranContent').innerText = `
                     Metode Pembayaran:\n ${buktiPembayaranData.metodePembayaran}
-                    \nTanggal Pemesanan:\n ${buktiPembayaranData.createdAt}
+                    \nTanggal Pemesanan:\n ${buktiPembayaranData.formattedDate}
                     \nNomor Rekening:\n ${buktiPembayaranData.nomorRekening}
                     \nHarga Tiket:\n Rp.${buktiPembayaranData.harga}
                 `;

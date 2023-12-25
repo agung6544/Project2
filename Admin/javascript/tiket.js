@@ -58,8 +58,8 @@ function searchTable() {
                 <td>${tiket.ID}</td>
                 <td>${tiket.nama_pemesan}</td>
                 <td>${tiket.wisata}</td>
-                <td>${tiket.metode_pembayaran}</td>
                 <td>${tiket.tanggal_pemesanan}</td>
+                <td>${tiket.metode_pembayaran}</td>
                 <td>Valid</td>
               `;
             });
@@ -108,8 +108,8 @@ function fetchDataAndDisplay() {
             <td>${tiket.ID}</td>
             <td>${tiket.nama_pemesan}</td>
             <td>${tiket.wisata}</td>
-            <td>${tiket.metode_pembayaran}</td>
             <td>${tiket.tanggal_pemesanan}</td>
+            <td>${tiket.metode_pembayaran}</td>
             <td>Valid</td>
           `;
         });

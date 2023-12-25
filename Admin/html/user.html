@@ -18,20 +18,38 @@
   </div>
       <div class="content">
         <div class="container mt-5">
-            <h1>User Info</h1>
-            <input type="text" id="searchInput" placeholder="Search for Username...">
+          <form class="custom-form needs-validation" novalidate>
+            <div class="mb-3">
+                <label for="exampleInputUsername" class="form-label">Username</label>
+                <input type="text" class="form-control" id="exampleInputUsername" required>
+                <div class="invalid-feedback">
+                    Username Harap Diisi.
+                </div>
+            </div>
+            <div class="mb-3">  
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" required>
+                <div class="invalid-feedback">
+                    Password Harap Diisi.
+                </div>
+            </div>  
+                <!-- Tambahkan elemen input tersembunyi -->
+            <input type="hidden" class="form-control" id="hiddenIdInput">
+            <button type="submit" class="btn btn-primary" id="hapusButton">Hapus</button>
+            <button type="submit" class="btn btn-primary" id="ubahButton">Ubah</button>
+            <button type="submit" class="btn btn-primary" id="simpanButton">Simpan</button>
             <button class="btn btn-primary" onclick="searchTable()">Search</button>
+        </form>
+            <h1>User Info</h1>
             <table class="table mt-3" id="ticketTable">
               <thead>
                 <tr>
                   <th scope="col">Username</th>
                   <th scope="col">Password</th>
                   <th scope="col">Total Tiket</th>
-                  <th scope="col"></th>
                 </tr>
               </thead>
               <tbody>
-
               </tbody>
             </table>
           </div>

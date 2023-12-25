@@ -17,8 +17,9 @@ func SetupRoutes(app *fiber.App) {
 	user.Get("/", handler.GetAllUsers)
 	user.Get("/:id", handler.GetSingleUser)
 	user.Post("/", handler.CreateUser)  // Tambahkan endpoint untuk membuat pengguna baru di sini
-	user.Put("/:id", handler.UpdateUser)
-	user.Delete("/:id", handler.DeleteUserByID)
+	user.Put("/:uuid", handler.UpdateUserByUUID)
+	user.Delete("/:uuid", handler.DeleteUserByUUID)
+
 
 	// Admin Group
 	admin := api.Group("/admin")

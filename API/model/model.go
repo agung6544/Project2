@@ -3,6 +3,7 @@ package model
 import (
 	"github.com/google/uuid"
 	"gorm.io/gorm"
+    "time"
 )
 
 // Identifiable is an interface that defines the BeforeCreate method
@@ -12,12 +13,13 @@ type Identifiable interface {
 
 // Define data struct required for User
 type User struct {
-    gorm.Model
     ID       uuid.UUID `gorm:"type:uuid;"`
     Username string    `json:"username" gorm:"unique"`
     Email    string    `json:"email"`
     Password string    `json:"password"`
     DecodedPassword string `json:"decoded_password"`
+    CreatedAt      time.Time `json:"created_at"`
+    UpdatedAt      time.Time `json:"updated_at"`
 }
 
 // Define data struct required for Admin
@@ -30,7 +32,6 @@ type Admin struct {
 
 // Define data struct required for Tiket
 type Tiket struct {
-    gorm.Model
     ID         uuid.UUID `gorm:"type:uuid;"`
     Username     string    `json:"username"`
     NamaPemesan string    `json:"nama_pemesan"`
@@ -40,6 +41,8 @@ type Tiket struct {
     HargaTicket string   `json:"harga_ticket"`
     MetodePembayaran string    `json:"metode_pembayaran"`
     NomorRekening string    `json:"nomor_rekening"`
+    CreatedAt      time.Time `json:"created_at"`
+    UpdatedAt      time.Time `json:"updated_at"`
 }
 
 // Users struct
