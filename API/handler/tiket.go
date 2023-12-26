@@ -70,48 +70,55 @@ func GetSingleTiket(c *fiber.Ctx) error {
     return c.Status(200).JSON(fiber.Map{"status": "success", "message": "Tiket Found", "data": tiket})
 }
 
-// Update a Tiket in db
-func UpdateTiket(c *fiber.Ctx) error {
+// UpdateTiketByUUID updates Tiket in db by UUID
+func UpdateTiketByUUID(c *fiber.Ctx) error {
     db := database.DB.Db
     var tiket model.Tiket
-    id := c.Params("id")
 
-    db.Find(&tiket, "id = ?", id)
+    // Get UUID from params
+    uuidParam := c.Params("uuid")
 
-    if tiket.ID == uuid.Nil {
+    // Parse UUID string to UUID type
+    id, err := uuid.Parse(uuidParam)
+    if err != nil {
+        return c.Status(400).JSON(fiber.Map{"status": "error", "message": "Invalid UUID", "data": nil})
+    }
+
+    // Parse request body to update Tiket fields
+    if err := c.BodyParser(&tiket); err != nil {
+        return c.Status(400).JSON(fiber.Map{"status": "error", "message": "Failed to parse request body", "data": nil})
+    }
+
+    // Set the ID for the update
+    tiket.ID = id
+
+    // Update Tiket in the database
+    result := db.Model(&model.Tiket{}).Where("id = ?", id[:]).Updates(&tiket)
+
+    if result.RowsAffected == 0 {
         return c.Status(404).JSON(fiber.Map{"status": "error", "message": "Tiket not found", "data": nil})
     }
 
-    var updateTiketData model.Tiket
-    err := c.BodyParser(&updateTiketData)
-    if err != nil {
-        return c.Status(500).JSON(fiber.Map{"status": "error", "message": "Something's wrong with your input", "data": err})
-    }
-
-    // Update fields as needed
-    // Example: tiket.SomeField = updateTiketData.SomeField
-    // You can update other fields as needed
-
-    db.Save(&tiket)
-
-    return c.Status(200).JSON(fiber.Map{"status": "success", "message": "Tiket Found", "data": tiket})
+    return c.Status(200).JSON(fiber.Map{"status": "success", "message": "Tiket updated", "data": tiket})
 }
 
-// Delete Tiket in db by ID
-func DeleteTiketByID(c *fiber.Ctx) error {
+// Delete Tiket in db by UUID
+func DeleteTiketByUUID(c *fiber.Ctx) error {
     db := database.DB.Db
     var tiket model.Tiket
-    id := c.Params("id")
 
-    db.Find(&tiket, "id = ?", id)
+    // Get UUID from params
+    uuidParam := c.Params("uuid")
 
-    if tiket.ID == uuid.Nil {
-        return c.Status(404).JSON(fiber.Map{"status": "error", "message": "Tiket not found", "data": nil})
+    // Parse UUID string to UUID type
+    id, err := uuid.Parse(uuidParam)
+    if err != nil {
+        return c.Status(400).JSON(fiber.Map{"status": "error", "message": "Invalid UUID", "data": nil})
     }
 
-    err := db.Delete(&tiket, "id = ?", id).Error
-    if err != nil {
-        return c.Status(404).JSON(fiber.Map{"status": "error", "message": "Failed to delete Tiket", "data": nil})
+    // Delete Tiket by UUID
+    if err := db.Delete(&tiket, "id = ?", id[:]).Error; err != nil {
+        return c.Status(500).JSON(fiber.Map{"status": "error", "message": "Failed to delete Tiket", "data": nil})
     }
 
     return c.Status(200).JSON(fiber.Map{"status": "success", "message": "Tiket deleted"})

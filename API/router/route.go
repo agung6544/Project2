@@ -39,5 +39,7 @@ func SetupRoutes(app *fiber.App) {
 	tiket.Get("/", handler.GetAllTiket)
 	tiket.Post("/", handler.CreateTiket)
 	tiket.Get("/:username", handler.GetAllTiketByUsername)
+	tiket.Delete("/:uuid",handler.DeleteTiketByUUID)
+	tiket.Put("/:uuid", handler.UpdateTiketByUUID)
 	app.Post("/api/validate-login", handler.ValidateLogin)
 }

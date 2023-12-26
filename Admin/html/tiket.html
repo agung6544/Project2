@@ -18,9 +18,35 @@
   </div>    
   <div class="content">
     <div class="container mt-5">
+      <form class="custom-form needs-validation" novalidate>
+        <div class="mb-3">
+          <label for="exampleInputTanggalPemesanan" class="form-label">Tanggal Check In :</label>
+          <input type="date" class="form-control" id="exampleInputTanggalPemesanan">
+            <div class="invalid-feedback">
+                Harap Diisi.
+            </div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputNama" class="form-label">Nama :</label>
+          <input type="text" class="form-control" id="exampleInputNama" >
+            <div class="invalid-feedback">
+                Harap Diisi.
+            </div>
+        </div>
+        <div class="mb-3">  
+          <label for="exampleInputSearch" class="form-label">Search by Kode,Nama, and Username</label>
+          <input type="text" class="form-control" id="exampleInputSearch" required>
+            <div class="invalid-feedback">
+              Harap Diisi.
+            </div>
+        </div> 
+            <!-- Tambahkan elemen input tersembunyi -->
+        <input type="hidden" class="form-control" id="hiddenIdInput">
+        <button type="submit" class="btn btn-primary" id="hapusButton">Hapus</button>
+        <button type="submit" class="btn btn-primary" id="ubahButton">Ubah</button>
+        <button class="btn btn-primary" onclick="searchTable()">Search</button>
+    </form>
       <h1>Pembayaran User Ticket Status</h1>
-      <input type="text" id="searchInput" placeholder="Search Tiket...">
-      <button class="btn btn-primary" onclick="searchTable()">Search</button>
       <table class="table mt-3" id="ticketTable">
         <thead>
           <tr>
@@ -33,7 +59,6 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Data will be dynamically inserted here -->
         </tbody>
       </table>
     </div>
