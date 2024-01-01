@@ -43,6 +43,7 @@ type Tiket struct {
     NomorRekening string    `json:"nomor_rekening"`
     CreatedAt      time.Time `json:"created_at"`
     UpdatedAt      time.Time `json:"updated_at"`
+    BuktiPembayaran  string  `json:"bukti_pembayaran"`
 }
 
 // Users struct

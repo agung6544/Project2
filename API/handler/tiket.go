@@ -6,6 +6,7 @@ import (
     "api/model"
     "github.com/gofiber/fiber/v2"
     "github.com/google/uuid"
+    "path/filepath"
 )
 
 // Create a Tiket
@@ -13,11 +14,37 @@ func CreateTiket(c *fiber.Ctx) error {
     db := database.DB.Db
     tiket := new(model.Tiket)
 
-    err := c.BodyParser(tiket)
+    // Handle file upload
+    file, err := c.FormFile("bukti_pembayaran")
     if err != nil {
-        return c.Status(500).JSON(fiber.Map{"status": "error", "message": "Something's wrong with your input", "data": err})
+        return c.Status(500).JSON(fiber.Map{"status": "error", "message": "Failed to process file upload", "data": err})
     }
 
+    // Generate unique filename using UUID
+    fileName := uuid.New().String() + filepath.Ext(file.Filename)
+    filePath := "./uploads/" + fileName
+
+    // Save the file to the specified path
+    if err := c.SaveFile(file, filePath); err != nil {
+        return c.Status(500).JSON(fiber.Map{"status": "error", "message": "Failed to save file", "data": err})
+    }
+
+    // Set the filepath and filename in the Tiket struct
+    tiket.BuktiPembayaran = filePath
+
+    // Parse request body for other Tiket fields
+    if err := c.BodyParser(tiket); err != nil {
+        return c.Status(500).JSON(fiber.Map{"status": "error", "message": "Failed to parse request body", "data": err})
+    }
+
+    // Manually set some fields based on your form data
+    tiket.NamaPemesan = c.FormValue("nama_pemesan")
+    tiket.TanggalPemesanan = c.FormValue("tanggal_pemesanan")
+    tiket.HargaTicket = c.FormValue("harga_ticket")
+    tiket.MetodePembayaran = c.FormValue("metode_pembayaran")
+    tiket.NomorRekening = c.FormValue("nomor_rekening")
+
+    // Create Tiket in the database
     err = db.Create(&tiket).Error
     if err != nil {
         return c.Status(500).JSON(fiber.Map{"status": "error", "message": "Could not create Tiket", "data": err})
@@ -25,6 +52,8 @@ func CreateTiket(c *fiber.Ctx) error {
 
     return c.Status(201).JSON(fiber.Map{"status": "success", "message": "Tiket has been created", "data": tiket})
 }
+
+
 
 // Get All Tiket by Username from db
 func GetAllTiketByUsername(c *fiber.Ctx) error {

@@ -15,17 +15,20 @@ document.getElementById('inputMetodePembayaran').addEventListener('change', func
 
 document.addEventListener('DOMContentLoaded', function () {});
 
+document.querySelector('form').addEventListener('submit', submitPayment);
+
 function submitPayment(event) {
   event.preventDefault();
 
   const orderData = JSON.parse(localStorage.getItem('orderData'));
   const username = localStorage.getItem('username');
-  
+
   if (!orderData || !username) {
     alert('Data pesanan tidak ditemukan. Silakan pesan tiket terlebih dahulu.');
     return;
   }
-// Add username to orderData
+
+  // Add username to orderData
   orderData.username = username;
 
   const form = event.target;
@@ -42,15 +45,17 @@ function submitPayment(event) {
     combinedFormData.append(key, value);
   }
 
-  // Ubah objek FormData menjadi objek JavaScript biasa
-  const combinedDataObject = Object.fromEntries(combinedFormData);
+  // Ambil file dari input file
+  const buktiPembayaranInput = document.getElementById('inputBuktiPembayaran');
+  const buktiPembayaranFile = buktiPembayaranInput.files[0];
+  if (buktiPembayaranFile) {
+    combinedFormData.append('bukti_pembayaran', buktiPembayaranFile);
+  }
 
+  // Kirim data ke server
   fetch('http://localhost:8080/api/tiket', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(combinedDataObject),
+    body: combinedFormData,
   })
     .then(response => response.json())
     .then(data => {
@@ -66,5 +71,3 @@ function submitPayment(event) {
       alert('Terjadi kesalahan. Silakan coba lagi.');
     });
 }
-
-document.querySelector('form').addEventListener('submit', submitPayment);
