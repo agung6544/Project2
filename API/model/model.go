@@ -44,6 +44,7 @@ type Tiket struct {
     CreatedAt      time.Time `json:"created_at"`
     UpdatedAt      time.Time `json:"updated_at"`
     BuktiPembayaran  string  `json:"bukti_pembayaran"`
+    Status  string  `json:"status"`
 }
 
 // Users struct

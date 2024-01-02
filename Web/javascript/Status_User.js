@@ -30,9 +30,9 @@ document.addEventListener('DOMContentLoaded', function () {
         cell4.innerHTML = "<b>Status</b>";
         cell5.innerHTML = "<b>Aksi</b>";
 
-    // Iterasi melalui setiap tiket dalam array data
-  data.data.forEach(tiket => {
-    const row = ticketTable.insertRow();
+// Iterasi melalui setiap tiket dalam array data
+data.data.forEach(tiket => {
+  const row = ticketTable.insertRow();
 
   // Mengonversi string tanggal menjadi objek Date
   const createdDate = new Date(tiket.created_at);
@@ -40,14 +40,17 @@ document.addEventListener('DOMContentLoaded', function () {
   // Membangun format tanggal yang diinginkan (YYYY-MM-DD)
   const formattedDate = `${createdDate.getFullYear()}-${String(createdDate.getMonth() + 1).padStart(2, '0')}-${String(createdDate.getDate()).padStart(2, '0')}`;
 
+  // Check if the status is "Konfirmasi"
+  const isKonfirmasi = tiket.status === 'Konfirmasi';
+
   row.innerHTML = `
     <td>${tiket.nama_pemesan}</td>
     <td>${tiket.wisata}</td>
     <td>${formattedDate}</td>
-    <td>Valid</td>
+    <td>${isKonfirmasi ? 'Valid' : 'Tidak Valid'}</td>
     <td>
-      <button onclick="cetakBuktiPembayaran('${tiket.metode_pembayaran}', '${formattedDate}', '${tiket.nomor_rekening}', '${tiket.harga_ticket}')">Cetak Bukti Pembayaran</button>
-      <button onclick="cetakTiket('${tiket.ID}','${tiket.tanggal_pemesanan}', '${tiket.nama_pemesan}', '${tiket.wisata}')">Cetak Tiket</button>
+      ${isKonfirmasi ? `<button onclick="cetakBuktiPembayaran('${tiket.metode_pembayaran}', '${formattedDate}', '${tiket.nomor_rekening}', '${tiket.harga_ticket}')">Cetak Bukti Pembayaran</button>
+      <button onclick="cetakTiket('${tiket.ID}','${tiket.tanggal_pemesanan}', '${tiket.nama_pemesan}', '${tiket.wisata}')">Cetak Tiket</button>` : ''}
     </td>
   `;
 });

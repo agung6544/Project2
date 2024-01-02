@@ -29,8 +29,8 @@ function searchTable() {
 }
 
 function fetchDataAndDisplay() {
-    // Make a fetch request to get ticket data from the server
-    fetch('http://localhost:8080/api/tiket')
+  // Make a fetch request to get ticket data from the server
+  fetch('http://localhost:8080/api/tiket')
     .then(response => response.json())
     .then(data => {
       // Memastikan data tidak kosong
@@ -61,36 +61,64 @@ function fetchDataAndDisplay() {
         cell7.innerHTML = "<b>Status</b>";
         cell8.style.display = 'none';
 
-// Iterasi melalui setiap tiket dalam array data
-data.data.forEach(tiket => {
-  const row = ticketTable.insertRow();
-  row.innerHTML = `
-    <td class="kode-tiket">${tiket.ID}</td>
-    <td>${tiket.nama_pemesan}</td>
-    <td>${tiket.wisata}</td>
-    <td>${tiket.tanggal_pemesanan}</td>
-    <td>${tiket.metode_pembayaran}</td>
-    <td><img src="../../API/${tiket.bukti_pembayaran}" style="max-width: 100px; max-height: 100px;"></td>
-    <td>Valid</td>
-    <td style="display: none;">${tiket.username}</td>
-  `;
-   // Add click event listener to the "Kode Tiket" cell
-   const kodeTiketCell = row.querySelector('.kode-tiket');
-   if (kodeTiketCell) {
-     kodeTiketCell.addEventListener('click', () => {
-       // Get the Tanggal Check In and Nama and fill the input fields
-       const tanggalInput = document.getElementById('exampleInputTanggalPemesanan');
-       const namaInput = document.getElementById('exampleInputNama');
-       const IDInput = document.getElementById('hiddenIdInput');
-       // Set the values in the input fields
-       if (tanggalInput && namaInput && IDInput) {
-         tanggalInput.value = tiket.tanggal_pemesanan;
-         namaInput.value = tiket.nama_pemesan;
-         IDInput.value = tiket.ID;
-       }
-     });
-    }
-});
+        // Iterasi melalui setiap tiket dalam array data
+        data.data.forEach(tiket => {
+          const row = ticketTable.insertRow();
+          row.innerHTML = `
+            <td class="kode-tiket">${tiket.ID}</td>
+            <td>${tiket.nama_pemesan}</td>
+            <td>${tiket.wisata}</td>
+            <td>${tiket.tanggal_pemesanan}</td>
+            <td>${tiket.metode_pembayaran}</td>
+            <td><img src="../../API/${tiket.bukti_pembayaran}" style="max-width: 100px; max-height: 100px;"></td>
+            <td><button class="btn btn-success btn-konfirmasi">Konfirmasi</button></td>
+            <td style="display: none;">${tiket.username}</td>
+          `;
+
+          // Add click event listener to the "Kode Tiket" cell
+          const kodeTiketCell = row.querySelector('.kode-tiket');
+          if (kodeTiketCell) {
+            kodeTiketCell.addEventListener('click', () => {
+              // Get the Tanggal Check In and Nama and fill the input fields
+              const tanggalInput = document.getElementById('exampleInputTanggalPemesanan');
+              const namaInput = document.getElementById('exampleInputNama');
+              const IDInput = document.getElementById('hiddenIdInput');
+              // Set the values in the input fields
+              if (tanggalInput && namaInput && IDInput) {
+                tanggalInput.value = tiket.tanggal_pemesanan;
+                namaInput.value = tiket.nama_pemesan;
+                IDInput.value = tiket.ID;
+              }
+            });
+          }
+
+          // Add click event listener to the "Konfirmasi" button
+          const konfirmasiButton = row.querySelector('.btn-konfirmasi');
+          if (konfirmasiButton) {
+            konfirmasiButton.addEventListener('click', () => {
+              // Implement your logic for confirming the ticket
+              console.log('Konfirmasi button clicked for ticket ID:', tiket.ID);
+
+              // Make a fetch request to update the status to "Konfirmasi"
+              fetch(`http://localhost:8080/api/tiket/${tiket.ID}`, {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  status: 'Konfirmasi',
+                }),
+              })
+                .then(response => response.json())
+                .then(updatedData => {
+                  // Handle the response as needed
+                  console.log('Ticket confirmed successfully:', updatedData);
+                  alert('Berhasi Dikonfirmasi!');
+                })
+                .catch(error => console.error('Error confirming ticket:', error));
+            });
+          }
+        });
       } else {
         console.error('Data tiket tidak ditemukan untuk username:', username);
       }
