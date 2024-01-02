@@ -51,43 +51,46 @@ function fetchDataAndDisplay() {
         const cell5 = row.insertCell(4);
         const cell6 = row.insertCell(5);
         const cell7 = row.insertCell(6);
+        const cell8 = row.insertCell(7);
         cell1.innerHTML = "<b>Kode Tiket</b>";
         cell2.innerHTML = "<b>Nama</b>";
         cell3.innerHTML = "<b>Tujuan Wisata</b>";
         cell4.innerHTML = "<b>Tanggal Check In</b>";
         cell5.innerHTML = "<b>Metode Pembayaran</b>";
-        cell6.innerHTML = "<b>Status</b>";
-        cell7.style.display = 'none';
+        cell6.innerHTML = "<b>Bukti Pembayaran</b>";
+        cell7.innerHTML = "<b>Status</b>";
+        cell8.style.display = 'none';
 
-        // Iterasi melalui setiap tiket dalam array data
-        data.data.forEach(tiket => {
-          const row = ticketTable.insertRow();
-          row.innerHTML = `
-            <td class="kode-tiket">${tiket.ID}</td>
-            <td>${tiket.nama_pemesan}</td>
-            <td>${tiket.wisata}</td>
-            <td>${tiket.tanggal_pemesanan}</td>
-            <td>${tiket.metode_pembayaran}</td>
-            <td>Valid</td>
-            <td style="display: none;">${tiket.username}</td>
-          `;
-           // Add click event listener to the "Kode Tiket" cell
-           const kodeTiketCell = row.querySelector('.kode-tiket');
-           if (kodeTiketCell) {
-             kodeTiketCell.addEventListener('click', () => {
-               // Get the Tanggal Check In and Nama and fill the input fields
-               const tanggalInput = document.getElementById('exampleInputTanggalPemesanan');
-               const namaInput = document.getElementById('exampleInputNama');
-               const IDInput = document.getElementById('hiddenIdInput');
-               // Set the values in the input fields
-               if (tanggalInput && namaInput && IDInput) {
-                 tanggalInput.value = tiket.tanggal_pemesanan;
-                 namaInput.value = tiket.nama_pemesan;
-                 IDInput.value = tiket.ID;
-               }
-             });
-            }
-        });
+// Iterasi melalui setiap tiket dalam array data
+data.data.forEach(tiket => {
+  const row = ticketTable.insertRow();
+  row.innerHTML = `
+    <td class="kode-tiket">${tiket.ID}</td>
+    <td>${tiket.nama_pemesan}</td>
+    <td>${tiket.wisata}</td>
+    <td>${tiket.tanggal_pemesanan}</td>
+    <td>${tiket.metode_pembayaran}</td>
+    <td><img src="../../API/${tiket.bukti_pembayaran}" style="max-width: 100px; max-height: 100px;"></td>
+    <td>Valid</td>
+    <td style="display: none;">${tiket.username}</td>
+  `;
+   // Add click event listener to the "Kode Tiket" cell
+   const kodeTiketCell = row.querySelector('.kode-tiket');
+   if (kodeTiketCell) {
+     kodeTiketCell.addEventListener('click', () => {
+       // Get the Tanggal Check In and Nama and fill the input fields
+       const tanggalInput = document.getElementById('exampleInputTanggalPemesanan');
+       const namaInput = document.getElementById('exampleInputNama');
+       const IDInput = document.getElementById('hiddenIdInput');
+       // Set the values in the input fields
+       if (tanggalInput && namaInput && IDInput) {
+         tanggalInput.value = tiket.tanggal_pemesanan;
+         namaInput.value = tiket.nama_pemesan;
+         IDInput.value = tiket.ID;
+       }
+     });
+    }
+});
       } else {
         console.error('Data tiket tidak ditemukan untuk username:', username);
       }
