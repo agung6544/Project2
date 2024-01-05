@@ -5,6 +5,7 @@ import (
 	"api/database"
 	"api/model"
 	"fmt"
+
 	"github.com/gofiber/fiber/v2"
 	"golang.org/x/crypto/bcrypt"
 )

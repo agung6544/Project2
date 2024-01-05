@@ -52,11 +52,14 @@ func Connect() {
 	db.Logger = logger.Default.LogMode(logger.Info)
 
 	log.Println("Running DB Auto Migration for Tiket")
-    db.AutoMigrate(&model.Tiket{})
+	db.AutoMigrate(&model.Tiket{})
 
 	log.Println("Running DB Auto Migration for Admin")
 	db.AutoMigrate(&model.User{}, &model.Admin{})
 	DB = Dbinstance{
 		Db: db,
 	}
+
+	log.Println("Running DB Auto Migration for Tiket_List")
+	db.AutoMigrate(&model.Tiket_List{})
 }

@@ -42,4 +42,12 @@ func SetupRoutes(app *fiber.App) {
 	tiket.Delete("/:uuid",handler.DeleteTiketByUUID)
 	tiket.Put("/:uuid", handler.UpdateTiketByUUID)
 	app.Post("/api/validate-login", handler.ValidateLogin)
+
+	// Tiket List Group
+	tiketList := api.Group("/tiket-list")
+
+	// Tiket List Routes
+	tiketList.Get("/", handler.GetAllTiketList)
+	tiketList.Get("/:wisata", handler.GetHargaTicketByWisata)
+	tiketList.Get("/list/:tujuan", handler.GetWisataByTujuan)
 }

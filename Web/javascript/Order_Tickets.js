@@ -1,58 +1,68 @@
 const tujuanSelect = document.getElementById('inputTujuan');
 const wisataSelect = document.getElementById('inputWisata');
-const inputHargaTicket = document.getElementById('inputHargaTicket');
+const hargaTicketInput = document.getElementById('inputHargaTicket');
 
-const destinasiWisata = {
-  'Pulau Jawa': ['Candi Borobudur', 'Gunung Bromo', 'Pantai Kuta', 'Taman Safari'],
-  'Pulau Sumatera': ['Danau Toba', 'Bukit Lawang', 'Kerinci Valley', 'Taman Nasional Gunung Leuser'],
-  'Pulau Bali': ['Pura Besakih', 'Waterbom Bali', 'Taman Nusa', 'Pantai Kuta'],
-  'Pulau Kalimantan': ['Taman Nasional Tanjung Puting', 'Pulau Kakaban', 'Gunung Kinabalu', 'Pasar Terapung Lok Baintan'],
-};
+// Function to fetch the list of wisata based on selected tujuan
+async function updateWisataOptions() {
+    const selectedTujuan = tujuanSelect.value;
+  
+    try {
+      // Fetch the list of wisata from the API
+      const response = await fetch(`http://localhost:8080/api/tiket-list/list/${selectedTujuan}`);
+      const responseData = await response.json();
+  
+      // Check if the data has the expected structure
+      if (Array.isArray(responseData.data)) {
+        // Clear existing options
+        wisataSelect.innerHTML = '';
+  
+        // Add new options based on the fetched data
+        responseData.data.forEach((wisata) => {
+          const option = document.createElement('option');
+          option.value = wisata;
+          option.text = wisata;
+          wisataSelect.appendChild(option);
+        });
+      } else {
+        console.error('Invalid data structure for wisataList:', responseData);
+      }
+    } catch (error) {
+      console.error('Error fetching wisata:', error);
+    }
+  }
+  
 
-function updateDestinasi() {
-  const selectedTujuan = tujuanSelect.value;
-  const wisataOptions = destinasiWisata[selectedTujuan] || [];
+  async function updateHargaTicket() {
+    const selectedWisata = wisataSelect.value;
+  
+    try {
+      // Fetch the harga ticket from the API
+      const response = await fetch(`http://localhost:8080/api/tiket-list/${selectedWisata}`);
+      const responseData = await response.json();
+  
+      // Check if the data has the expected structure
+      if (responseData.status === 'success' && typeof responseData.data !== 'undefined') {
+        // Update the inputHargaTicket value
+        hargaTicketInput.value = responseData.data;
+      } else {
+        console.error('Invalid data structure for harga ticket:', responseData);
+        // You might want to handle this case, e.g., set a default value or display an error message.
+      }
+    } catch (error) {
+      console.error('Error fetching harga ticket:', error);
+    }
+  }
+  
 
-  wisataSelect.innerHTML = '<option selected>Pilih Wisata</option>';
+// Event listener for changes in inputTujuan
+tujuanSelect.addEventListener('change', () => {
+  updateWisataOptions();
+});
 
-  wisataOptions.forEach((wisata) => {
-    const option = document.createElement('option');
-    option.value = wisata;
-    option.textContent = wisata;
-    wisataSelect.appendChild(option);
-  });
-
+// Event listener for changes in inputWisata
+wisataSelect.addEventListener('change', () => {
   updateHargaTicket();
-}
-
-tujuanSelect.addEventListener('change', updateDestinasi);
-
-function updateHargaTicket() {
-  const selectedDestination = wisataSelect.value;
-
-  const ticketPrices = {
-    'Danau Toba': 20000,
-    'Bukit Lawang': 25000,
-    'Kerinci Valley': 20000,
-    'Taman Nasional Gunung Leuser': 15000,
-    'Candi Borobudur': 15000,
-    'Gunung Bromo': 45000,
-    'Kawa Ijen': 20000,
-    'Taman Safari': 50000,
-    'Pura Besakih': 50000,
-    'Waterbom Bali': 50000,
-    'Taman Nusa': 40000,
-    'Pantai Kuta': 50000,
-    'Taman Nasional Tanjung Puting': 20000,
-    'Pulau Kakaban': 25000,
-    'Gunung Kinabalu': 45000,
-    'Pasar Terapung Lok Baintan': 20000,
-  };
-
-  inputHargaTicket.value = ticketPrices[selectedDestination] || 'Pilih Tujuan terlebih dahulu';
-}
-
-wisataSelect.addEventListener('change', updateHargaTicket);
+});
 
 function saveOrderData(formData) {
   localStorage.setItem('orderData', JSON.stringify(Object.fromEntries(formData)));
