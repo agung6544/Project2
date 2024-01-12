@@ -10,7 +10,7 @@ function searchTable() {
   // Loop through each row and hide/show based on the search term
   for (let i = 1; i < rows.length; i++) {
     const idCell = rows[i].getElementsByTagName('td')[0];
-    const usernameCell = rows[i].getElementsByTagName('td')[6];
+    const usernameCell = rows[i].getElementsByTagName('td')[7];
     const namaPemesanCell = rows[i].getElementsByTagName('td')[1];
 
     if (idCell && usernameCell && namaPemesanCell) {

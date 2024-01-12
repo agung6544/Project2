@@ -55,6 +55,14 @@ type Tiket_List struct {
     HargaTicket int    `json:"harga_ticket"`
 }
 
+// Define data struct required for Wisata
+type Wisata struct {
+    ID                uint      `gorm:"primaryKey" json:"id"`
+    NamaWisata        string    `json:"nama_wisata"`
+    DeskripsiWisata   string    `json:"deskripsi_wisata"`
+    Image             string    `json:"image"`
+}
+
 // Users struct
 type Users struct {
 	Users []User `json:"users"`
@@ -70,9 +78,14 @@ type Tikets struct {
     Tikets []Tiket `json:"tikets"`
 }
 
-// Tikets struct
+// Tikets List struct
 type Tikets_List struct {
     Tikets_List []Tiket_List `json:"tiket_list"`
+}
+
+// Wisata struct
+type WisataS struct {
+	WisataS []Wisata `json:"wisata"`
 }
 
 // BeforeCreate is a common method for generating UUID before record creation

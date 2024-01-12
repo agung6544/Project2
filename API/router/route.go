@@ -50,4 +50,10 @@ func SetupRoutes(app *fiber.App) {
 	tiketList.Get("/", handler.GetAllTiketList)
 	tiketList.Get("/:wisata", handler.GetHargaTicketByWisata)
 	tiketList.Get("/list/:tujuan", handler.GetWisataByTujuan)
+
+	// Tiket List Group
+	wisata := api.Group("/wisata")
+
+	// Tiket List Routes
+	wisata.Get("/", handler.GetAllWisataList)
 }

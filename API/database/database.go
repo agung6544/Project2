@@ -62,4 +62,6 @@ func Connect() {
 
 	log.Println("Running DB Auto Migration for Tiket_List")
 	db.AutoMigrate(&model.Tiket_List{})
+
+	
 }

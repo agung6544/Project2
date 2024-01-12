@@ -2,6 +2,17 @@ const tujuanSelect = document.getElementById('inputTujuan');
 const wisataSelect = document.getElementById('inputWisata');
 const hargaTicketInput = document.getElementById('inputHargaTicket');
 
+document.addEventListener('DOMContentLoaded', () => {
+  // Get username from local storage
+  const username = localStorage.getItem('username');
+
+  // Set the value of inputNamaPemesan with the username
+  const inputNamaPemesan = document.getElementById('inputNamaPemesan');
+  if (inputNamaPemesan && username) {
+    inputNamaPemesan.value = username;
+  }
+});
+
 // Function to fetch the list of wisata based on selected tujuan
 async function updateWisataOptions() {
     const selectedTujuan = tujuanSelect.value;
